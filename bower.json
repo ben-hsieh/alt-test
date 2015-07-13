@@ -1,0 +1,20 @@
+{
+  "name": "alt-test",
+  "version": "0.0.0",
+  "authors": [
+    "寫詩羊 <Habuche@gmail.com>"
+  ],
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ]
+}
