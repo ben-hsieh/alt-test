@@ -19,7 +19,7 @@ config.plugins = [
 config.devTool = "eval-source-map";
 
 config.module.loaders.push(
-	{test: /\.jsx$/, loaders: ["react-hot", "babel"], excclude: /node_modules/},
+	{test: /\.jsx?$/, loaders: ["react-hot", "babel"], exclude: /node_modules/},
 	{test: /\.css$/, loader: "style!css"},
 	{
 		test: /\.scss$/,
