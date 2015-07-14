@@ -9,8 +9,10 @@ class LocationStore{
 		this.errorMessage = null;
 
 		/**
-		 * 新增各項監聽項目
+		 * 新增各項監聽項目 from Actions
+		 * this.method 對應=> from Action
 		 */
+
 		this.bindListeners({
 			handleUpdateLocations: LocationActions.UPDATE_LOCATIONS,
 			handleFetchLocations: LocationActions.FETCH_LOCATIONS,
@@ -26,18 +28,31 @@ class LocationStore{
 		});
 
 		/**
-		 * 同步方法 ... ?
+		 * 給一個非同步的method
+		 * (用來讀取資料用)
+		 * 它預設會需要4個method:
+		 * remote, local, success, error, loading
+		 * 好像也可以用 registerAsync?
 		 */
+		
 		this.exportAsync(LocationSource);
 	}
 
 
 	handleUpdateLocations(locations) {
+		/**
+		 * 這邊一執行就會自動重新 render 了
+		 */
 		this.locations = locations;
 		this.errorMessage = null;
 	}
 
+	/**
+	 * fetch 前會執行這邊
+	 */
 	handleFetchLocations() {
+		// console.warn("執行 handleFetchLocations!");
+		// console.info(this.locations);
 		this.locations = [];
 	}
 
@@ -57,17 +72,23 @@ class LocationStore{
 
 	setFavorites(location) {
 
-		console.log("LocationStore's setFavorites");
+		console.warn("LocationStore's setFavorites");
 
 		/**
 		 * 這行是為了確保 FavoritesStore 有被載入
 		 * 再繼續進行
+		 * 主要原因是因為 Locations.jsx 那邊的
+		 * LocationActions.favoriteLocation
+		 * 它會觸發Location, Favorites 的
+		 * favoriteLocation 方法
+		 * 所以這邊才要等另一邊先結束
+		 * 以確保另一邊已 push 進去
 		 */
 		this.waitFor(FavoritesStore);
 
 		var favoritedLocations = FavoritesStore.getState().locations;
 
-		console.log(favoritedLocations);
+		// console.warn(favoritedLocations);
 
 		this.resetAllFavorites();
 

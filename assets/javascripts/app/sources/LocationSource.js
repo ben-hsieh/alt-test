@@ -16,33 +16,44 @@ var mockData = [
 	{ id: 12, name: "San Francisco" }
 ];
 
-var LocationSource = {
+const LocationSource = {
 
 	/**
 	 * 這個方法將會被加到 LocationStore裡
 	 */
 	fetchLocations(){
+
+		// console.warn("Source");
+
 		return {
 			remote(){
+				// console.warn("remote");
 				return new Promise((resolve, reject)=>{
 					// 這邊就去呼叫 api get data
 					setTimeout(()=>{
 						if(true){
 							//這邊會傳到下面的 success
+							// console.warn("讀到資料!");
 							resolve(mockData);
 						}else{
 							//這邊會傳到下面的 error
 							reject("Things have broken");
 						}
-					}, 250);
+					}, 150);
 				});
 			},
-			local(){
+			local( /* state */ ){
+				//用來初始化 this.state 的資料
+				// console.warn("local");
 				return null;
 			},
 			success: LocationActions.updateLocations,
 			error: LocationActions.locationsFailed,
-			loading: LocationActions.fetchLocations
+			loading: LocationActions.fetchLocations,
+			shouldFetch(state) {
+				// console.warn("shouldFetch");
+				return true;
+			}
 		};
 	}
 };

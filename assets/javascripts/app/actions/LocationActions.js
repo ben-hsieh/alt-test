@@ -13,7 +13,7 @@ class LocationActions {
 		this.dispatch(errorMessage);
 	}
 
-	// 它會在 FavoriteStore 被使用
+	// 它也會在 FavoriteStore 被使用
 	favoriteLocation(location){
 		this.dispatch(location);
 	}
