@@ -57,6 +57,8 @@ class LocationStore{
 
 	setFavorites(location) {
 
+		console.log("LocationStore's setFavorites");
+
 		/**
 		 * 這行是為了確保 FavoritesStore 有被載入
 		 * 再繼續進行
@@ -64,6 +66,8 @@ class LocationStore{
 		this.waitFor(FavoritesStore);
 
 		var favoritedLocations = FavoritesStore.getState().locations;
+
+		console.log(favoritedLocations);
 
 		this.resetAllFavorites();
 

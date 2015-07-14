@@ -11,6 +11,9 @@ class FavoritesStore {
 	}
 
 	addFavoriteLocation(location){
+
+		console.log("FavoriteStore's addFavoriteLocation");
+
 		this.locations.push(location);
 		// console.log(this);
 	}
